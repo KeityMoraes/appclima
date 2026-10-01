@@ -13,7 +13,7 @@ O projeto está preparado, mas a publicação exige uma conta Netlify autenticad
 1. Crie um repositório com os arquivos deste projeto e importe-o no Netlify (Add new project / Import an existing project).
 2. A configuração `netlify.toml` define build `npm run build`, diretório público `dist` e funções `netlify/functions`. Não publique apenas a pasta dist por upload manual: a aplicação necessita da função de servidor para dados reais.
 3. No Netlify, adicione `OPENWEATHER_API_KEY` em Environment variables, disponível no escopo Functions; não coloque o segredo em netlify.toml ou nos arquivos públicos.
-4. Execute um novo deploy e abra a URL de produção. Use a busca e confirme que o banner de demonstração não aparece.
+4. Execute um novo deploy e abra a URL de produção. Use a busca e confirme que o banner de demonstração não aparece. Variáveis adicionadas ou alteradas depois do último deploy só passam a valer a partir do deploy seguinte; se `/api/weather` ainda responder `MISSING_KEY`, publique de novo.
 5. Alternativa por CLI, após instalar o Netlify CLI e autenticar: execute `netlify init`, configure a variável pelo painel e execute `netlify deploy --build --prod`.
 
 ## Funcionalidades e critérios
