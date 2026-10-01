@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#080f17"><meta name="description" content="Clima das cidades brasileiras e atenção à umidade do Cerrado."><title>Clima Cerrado • O tempo perto de você</title><link rel="stylesheet" href="/styles.css"><script type="module" src="/app.js"></script></head>
+<body>
+<header class="topbar"><a class="brand" href="/" aria-label="Clima Cerrado início"><span class="brand-icon">☀</span> clima<span>cerrado</span></a><span class="header-tag">BRASIL <span class="dot"></span> TEMPO & NATUREZA</span></header>
+<main>
+<section class="intro"><div><p class="eyebrow">SEU DIA COMEÇA AQUI</p><h1>O tempo perto de você.</h1><p>Um olhar para o céu. Um cuidado com o Cerrado.</p></div><span class="region-badge">↗ Feito para o Brasil</span></section>
+<form id="search" role="search"><label class="sr-only" for="city">Buscar cidade brasileira</label><span aria-hidden="true">⌕</span><input id="city" name="city" placeholder="Qual cidade você quer explorar?" autocomplete="off" maxlength="100" required><button type="submit">Buscar cidade <span aria-hidden="true">→</span></button></form>
+<nav class="cities" aria-label="Cidades sugeridas"><span>Explore</span><button data-city="Goiânia, GO">Goiânia</button><button data-city="Rio Verde, GO">Rio Verde</button><button data-city="Anápolis, GO">Anápolis</button><button data-city="Brasília, DF">Brasília</button><button data-city="Rio de Janeiro, RJ">Rio de Janeiro</button><button data-city="São Paulo, SP">São Paulo</button></nav>
+<p id="status" class="status" role="status" aria-live="polite"></p><div id="error" class="error" role="alert" hidden></div>
+<aside id="demo-banner" class="demo" hidden><span>◉ <strong>Modo de demonstração</strong> — estes dados são simulados.</span><button id="live">Consultar dados reais →</button></aside>
+<div class="dashboard" id="dashboard" aria-busy="false">
+<section class="weather-card" aria-label="Clima atual"><div class="card-top"><div><p class="eyebrow">CLIMA AGORA</p><h2 id="location">—</h2><p id="timestamp" class="timestamp">—</p></div><button id="refresh" class="refresh" aria-label="Atualizar clima" title="Atualizar clima">↻</button></div>
+<div class="weather-main"><div><div class="temperature"><span id="temp">—</span><span class="unit">°C</span></div><p id="description" class="description">—</p><p class="range" id="range">—</p></div><div class="weather-art"><div class="sun" aria-hidden="true"></div><img id="icon" alt="" width="160" height="160"></div></div>
+<div class="landscape" aria-hidden="true"><div class="hill back"></div><div class="hill front"></div><div class="tree">♧</div><span>CERRADO · NATUREZA EM CADA ESTAÇÃO</span></div>
+<div class="card-bottom"><span><span class="dot"></span> <span id="source">OpenWeatherMap</span></span><span id="range-note">Temperaturas em Celsius</span></div></section>
+<aside class="details"><div class="metric"><span class="metric-icon">♧</span><div><p>Umidade do ar</p><strong id="humidity">—</strong></div><span id="humidity-tag" class="metric-tag">—</span></div><div class="metric"><span class="metric-icon">≋</span><div><p>Velocidade do vento</p><strong id="wind">—</strong></div></div><div class="metric"><span class="metric-icon">♨</span><div><p>Sensação térmica</p><strong id="feels">—</strong></div></div><div class="care"><span class="eyebrow">UM LEMBRETE PARA HOJE</span><p>O clima muda.<br>O cuidado permanece.</p><span>Acompanhe a umidade e cuide do ambiente ao seu redor.</span></div></aside>
+</div>
+<aside id="alert" class="environment-alert" role="alert" hidden><span class="alert-symbol">!</span><div><h3 id="alert-title"></h3><p id="alert-text"></p><p class="alert-advice">Evite o uso de fogo e a queima de resíduos. Beba água e reduza a exposição à fumaça.</p></div><span id="alert-value"></span></aside>
+<section class="forecast-section"><div class="section-heading"><div><p class="eyebrow">PLANEJE SEU DIA</p><h2>Próximas horas</h2></div><span>Previsão a cada 3 horas</span></div><div id="forecast" class="forecast"></div></section>
+<footer><span>clima<strong>cerrado</strong> <span class="footer-separator">/</span> Mais informação, mais cuidado.</span><span>Dados: OpenWeatherMap · Brasil</span></footer>
+</main></body></html>
+
