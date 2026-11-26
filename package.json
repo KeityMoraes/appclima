@@ -4,9 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "predev": "node scripts/generate-agent-context.mjs",
     "dev": "node server.mjs",
+    "prestart": "node scripts/generate-agent-context.mjs",
     "start": "node server.mjs",
-    "build": "node scripts/build.mjs",
+    "build": "node scripts/generate-agent-context.mjs && node scripts/build.mjs",
     "test": "node --test"
   },
   "engines": {

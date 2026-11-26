@@ -28,7 +28,7 @@ O projeto está preparado, mas a publicação exige uma conta Netlify autenticad
 - Estados de carregamento, erros de cidade/chave/rede e degradação quando a previsão falha.
 - Campos rotulados, mensagens acessíveis, navegação por teclado e layout móvel.
 - Chaves OpenWeatherMap e Gemini mantidas exclusivamente no servidor; requisições aos provedores têm limite de tempo.
-- Assistente de clima com Gemini: responde somente sobre clima e previsão, com as regras em `netlify/functions/AGENT_CONTEXT.md`. Usa a cidade selecionada no painel quando a pergunta não especifica localidade; quando a pergunta cita uma cidade, atualiza o painel antes de responder. No modo demonstrativo, aceita as seis cidades sugeridas.
+- Assistente de clima com Gemini: responde somente sobre clima e previsão, com as regras em `netlify/functions/AGENT_CONTEXT.md`. O build gera o módulo de contexto estático para incluir as regras no pacote da função. Usa a cidade selecionada no painel quando a pergunta não especifica localidade; quando a pergunta cita uma cidade, atualiza o painel antes de responder. No modo demonstrativo, aceita as seis cidades sugeridas.
 
 ## Verificação
 `npm test` testa limites de alerta, datas locais e integração do backend com respostas simuladas.

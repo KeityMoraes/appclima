@@ -1,8 +1,6 @@
-import { readFile } from 'node:fs/promises';
+import { agentContext } from './agent-context.mjs';
 
 const headers = { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' };
-let contextPromise;
-const loadAgentContext = () => contextPromise ||= readFile(new URL('./AGENT_CONTEXT.md', import.meta.url), 'utf8');
 const reply = (statusCode, data) => ({ statusCode, headers, body: JSON.stringify(data) });
 
 export async function handler(event) {
@@ -16,10 +14,7 @@ export async function handler(event) {
   const message = typeof body.message === 'string' ? body.message.trim() : '';
   if (!message || message.length > 1200) return reply(400, { error: 'Escreva uma pergunta de até 1.200 caracteres.' });
 
-  let context;
-  try { context = await loadAgentContext(); }
-  catch (error) { console.error('Não foi possível carregar AGENT_CONTEXT.md:', error.message); return reply(500, { error: 'O contexto do assistente não foi carregado. Verifique AGENT_CONTEXT.md no servidor.' }); }
-
+  const context = agentContext;
   const history = Array.isArray(body.history) ? body.history.slice(-8).filter(item => ['user', 'model'].includes(item?.role) && typeof item?.text === 'string').map(item => ({ role: item.role, parts: [{ text: item.text.slice(0, 1200) }] })) : [];
   const weather = body.weather && typeof body.weather === 'object' ? JSON.stringify(body.weather).slice(0, 5000) : 'Dados do painel não disponíveis.';
   const contents = [...history, { role: 'user', parts: [{ text: `Pergunta: ${message}` }] }];
