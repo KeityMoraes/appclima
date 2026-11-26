@@ -1,3 +1,5 @@
+[functions]
+  included_files = ["netlify/functions/AGENT_CONTEXT.md"]
 [build]
   command = "npm run build"
   publish = "dist"
@@ -7,6 +9,10 @@
 [[redirects]]
   from = "/api/weather"
   to = "/.netlify/functions/weather"
+  status = 200
+[[redirects]]
+  from = "/api/assistant"
+  to = "/.netlify/functions/assistant"
   status = 200
 [[redirects]]
   from = "/*"

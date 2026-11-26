@@ -3,7 +3,7 @@ SPA responsiva em português, inspirada no Google Clima, com JavaScript, HTML e 
 
 ## Rodar localmente
 1. Abra o terminal nesta pasta.
-2. Copie `.env.example` para `.env` e substitua o valor de `OPENWEATHER_API_KEY` pela chave da sua conta OpenWeatherMap. Não compartilhe nem versione `.env`.
+2. Copie `.env.example` para `.env` e substitua o valor de `OPENWEATHER_API_KEY` pelas chaves `OPENWEATHER_API_KEY` e `GEMINI_API_KEY` dos respectivos serviços. Não compartilhe nem versione `.env`.
 3. Execute `npm run dev` e abra http://localhost:5173.
 
 Sem chave, o aplicativo exibe exemplos simulados e um aviso permanente de demonstração. A busca de demonstração aceita as seis cidades sugeridas. Rio Verde e Brasília demonstram emergência; Goiânia e Anápolis demonstram atenção; São Paulo e Rio demonstram ausência de alerta. Para consultar qualquer cidade brasileira, configure a chave. Buscas ambíguas podem ser refinadas com UF, por exemplo `Anápolis, GO`.
@@ -12,7 +12,7 @@ Sem chave, o aplicativo exibe exemplos simulados e um aviso permanente de demons
 O projeto está preparado, mas a publicação exige uma conta Netlify autenticada e a chave OpenWeatherMap.
 1. Crie um repositório com os arquivos deste projeto e importe-o no Netlify (Add new project / Import an existing project).
 2. A configuração `netlify.toml` define build `npm run build`, diretório público `dist` e funções `netlify/functions`. Não publique apenas a pasta dist por upload manual: a aplicação necessita da função de servidor para dados reais.
-3. No Netlify, adicione `OPENWEATHER_API_KEY` em Environment variables, disponível no escopo Functions; não coloque o segredo em netlify.toml ou nos arquivos públicos.
+3. No Netlify, adicione `OPENWEATHER_API_KEY` e `GEMINI_API_KEY` em Environment variables, disponíveis no escopo Functions; não coloque os segredos em netlify.toml ou nos arquivos públicos.
 4. Execute um novo deploy e abra a URL de produção. Use a busca e confirme que o banner de demonstração não aparece. Variáveis adicionadas ou alteradas depois do último deploy só passam a valer a partir do deploy seguinte; se `/api/weather` ainda responder `MISSING_KEY`, publique de novo.
 5. Alternativa por CLI, após instalar o Netlify CLI e autenticar: execute `netlify init`, configure a variável pelo painel e execute `netlify deploy --build --prod`.
 
@@ -27,7 +27,8 @@ O projeto está preparado, mas a publicação exige uma conta Netlify autenticad
 - Banner de risco de queimadas e agravamento de problemas respiratórios, com orientações de cuidado, especialmente para Cerrado/Goiás.
 - Estados de carregamento, erros de cidade/chave/rede e degradação quando a previsão falha.
 - Campos rotulados, mensagens acessíveis, navegação por teclado e layout móvel.
-- Chave mantida exclusivamente no servidor; requisições ao provedor têm limite de tempo.
+- Chaves OpenWeatherMap e Gemini mantidas exclusivamente no servidor; requisições aos provedores têm limite de tempo.
+- Assistente de clima com Gemini: responde somente sobre clima e previsão, com as regras em `netlify/functions/AGENT_CONTEXT.md`. Usa a cidade selecionada no painel quando a pergunta não especifica localidade; quando a pergunta cita uma cidade, atualiza o painel antes de responder. No modo demonstrativo, aceita as seis cidades sugeridas.
 
 ## Verificação
 `npm test` testa limites de alerta, datas locais e integração do backend com respostas simuladas.
