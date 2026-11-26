@@ -1,7 +1,7 @@
 import http from 'node:http';
 import { readFile } from 'node:fs/promises';
 import { handler } from './netlify/functions/weather.mjs';
-import { handler as assistantHandler } from './netlify/functions/assistant.mjs';
+import assistantHandler from './netlify/functions/assistant.mjs';
 // Carrega somente a chave local; as variáveis do ambiente de produção têm prioridade.
 try {
   const env = await readFile(new URL('.env', import.meta.url), 'utf8');
@@ -24,8 +24,8 @@ http.createServer(async (req, res) => {
       body += chunk;
       if (body.length > 16000) { res.writeHead(413); res.end(JSON.stringify({ error: 'Mensagem muito longa.' })); return; }
     }
-    const result = await assistantHandler({ httpMethod: req.method, body });
-    res.writeHead(result.statusCode, result.headers); res.end(result.body); return;
+    const result = await assistantHandler(new Request(url, { method: req.method, body }));
+    res.writeHead(result.status, Object.fromEntries(result.headers)); res.end(await result.text()); return;
   }
   const file = files[url.pathname];
   if (!file) { res.writeHead(404); res.end('Não encontrado'); return; }
